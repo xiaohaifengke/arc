@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Flight Animation</title>
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://api.mapbox.com/mapbox.js/plugins/arc.js/v0.1.0/arc.js"></script>
+    <script src="../lib/arc-points.js"></script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+        .map {
+            padding-top: 5%;
+            width: 100%;
+            height: 80%;
+        }
+    </style>
+</head>
+<body>
+<div id="map" class="map"></div>
+<script src="index.js"></script>
+</body>
+</html>

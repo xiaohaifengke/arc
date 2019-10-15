@@ -4,9 +4,9 @@ module.exports = {
   mode: 'production',
   entry: './src/index.js',
   output: {
-    filename: 'arc.js',
+    filename: 'arc-points.js',
     path: path.resolve(__dirname, 'lib'),
-    library: 'Arc',
+    library: 'arcPoints',
     libraryTarget: 'umd',
     globalObject: 'this'
   },
