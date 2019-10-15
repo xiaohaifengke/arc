@@ -1,0 +1,35 @@
+{
+  "author": [
+    {
+      "name": "jhail.xhfk",
+      "email": "jiahailiu.xhfk@gmail.com",
+      "url": ""
+    }
+  ],
+  "description": "Draw the trails that does not coincide.",
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
+  },
+  "keywords": [
+    "arc",
+    "bezier"
+  ],
+  "license": "MIT",
+  "main": "lib/arc.js",
+  "name": "arc",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xiaohaifengke/arc"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "version": "1.0.0"
+}
