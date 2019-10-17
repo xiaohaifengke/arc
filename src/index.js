@@ -64,21 +64,23 @@ export const arcPoints = {
 
   /**
    * 计算cph, cpv的值
+   * @param {object} sameTrailVectorTimes 相同两点相同方向的轨迹（相同矢量）的矢量集合
    * @param {Array<number, number>} startPoint 该轨迹矢量的起点
    * @param {Array<number, number>} endPoint 该轨迹矢量的终点
-   * @param {number} startPointIndex 该轨迹矢量在所有轨迹中的索引
-   * @param {number} initCph 轨迹最高点的位置比例（默认为轨迹中点） default: 0.5
+   * @param {number} startPointIndex 该轨迹矢量在重复轨迹中的索引
+   * @param {number} initCph 轨迹最高点的位置水平方向比例 default: 0.45
+   * @param {number} initCpv 轨迹最高点的位置垂直方向比例 default: 0.16
+   * @param {number} cpvStep  default: 0.05
    * */
-  getCphvFromIdenticTrailVectorTimes (startPoint, endPoint, startPointIndex, initCph = 0.45, initCpv = 0.16) {
+  getCphvFromIdenticTrailVectorTimes (sameTrailVectorTimes, startPoint, endPoint, startPointIndex, initCph = 0.45, initCpv = 0.16, cpvStep = 0.05) {
     let minCph = 0.1
     let key = `${startPoint[0]},${startPoint[1]}--${endPoint[0]},${endPoint[1]}`
-    let times = this.iIdenticTrailVectorTimes[key].length
+    let times = sameTrailVectorTimes[key].length
     // 该轨迹矢量在重复轨迹中的索引
-    let index = this.iIdenticTrailVectorTimes[key].indexOf(startPointIndex)
+    let index = sameTrailVectorTimes[key].indexOf(startPointIndex)
     // TODO: config dimensionSize
     let dimensionSize = 2 // 每个维度的轨迹图形最多显示的个数，超出之后的轨迹的cph值会更大
     let cphStep = ((initCph - minCph) / dimensionSize).toFixed(2)
-    let cpvStep = 0.05
     let cpvIndex = parseInt(index / dimensionSize) // 维度索引
     let cphIndex = index % dimensionSize // 同个维度下的轨迹索引
     let cph = (initCph - cphIndex * cphStep).toFixed(2)
