@@ -20,7 +20,7 @@ import { toSize } from 'ol/size'
 import Select from 'ol/interaction/Select'
 import { pointerMove } from 'ol/events/condition'
 import DragBox from 'ol/interaction/DragBox'
-import {getVectorContext} from 'ol/render';
+import { getVectorContext } from 'ol/render'
 import { arcPoints } from '../lib/arc-points'
 import points from './mockData'
 
@@ -32,14 +32,13 @@ let map
 let draw
 let locationFeatureVectorSource
 let locationFeatureVectorLayer
-const ARCLINES = window.ARCLINES = [] // for debug
 
 // mock data start
 const timelineInfo = []
 for (let i = 0; i < 20; i++) {
   let random = Math.floor(Math.random() * 5)
   const point = {...points[random]}
-  if (timelineInfo.length > 0 && point.lnt === timelineInfo[timelineInfo.length - 1].lnt)  continue // 排除两个相同的点
+  if (timelineInfo.length > 0 && point.lnt === timelineInfo[timelineInfo.length - 1].lnt) continue // 排除两个相同的点
   point.captureId = Math.random() + ''
   timelineInfo.push(point)
 }
@@ -203,7 +202,7 @@ const trail = {
 
   // 绘制轨迹
   drawTrajectory (points) {
-    var pointsPerMs = 0.05
+    var pointsPerMs = 0.2
     // let that = this
     if (!points) return
     let coordinates = []
@@ -336,9 +335,17 @@ const trail = {
       }
       let startPoint = coordinates[n]
       let endPoint = coordinates[n + 1]
-      let {cph, cpv} = arcPoints.getCphvFromIdenticTrailVectorTimes(sameTrailVectorTimes, startPoint, endPoint, n, 0.45, 0.3, 0.15)
-      let arcLine = arcPoints.bezierPoints(startPoint, endPoint, 100, {cph, cpv}) // cph: 0.5, cpv: 0.16
-      ARCLINES.push(arcLine)
+      let {cph, cpv} = arcPoints.getCphvFromIdenticTrailVectorTimes({
+        sameTrailVectorTimes,
+        startPoint,
+        endPoint,
+        startPointIndex: n,
+        dimensionSize: 1,
+        initCph: 0.45,
+        initCpv: 0.3,
+        cpvStep: 0.15
+      })
+      let arcLine = arcPoints.generateBezierPoints(startPoint, endPoint, 100, {cph, cpv, direction: 'ring'}) // cph: 0.5, cpv: 0.16
       let lineGeometry = new LineString(arcLine)
       let lineFeature = new Feature({
         geometry: lineGeometry,

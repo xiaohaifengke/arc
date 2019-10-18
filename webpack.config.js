@@ -8,7 +8,7 @@ module.exports = {
     filename: 'arc-points.js',
     // filename: 'arc-points.dev.js',
     path: path.resolve(__dirname, 'lib'),
-    library: 'arcPoints',
+    library: 'arc',
     libraryTarget: 'umd',
     globalObject: 'this'
   },

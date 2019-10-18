@@ -4,10 +4,11 @@ export const arcPoints = {
    * 假定起点为P0,终点分别为P2, 所求的控制点为P1, 计算时需要先计算过度点T )
    * @param { Array<number> } start 弧形起点坐标
    * @param { Array<number> } end 弧形终点坐标
+   * @param { string } direction 轨迹的方向 'up'|'down'|'ring'
    * @param { number } cph 第三个控制点横向偏离比例，取值范围：[0,1]. default: 0.5
    * @param { number } cpv 第三个控制点纵向偏离比例，取值范围：[0,1]. default: 0.2
    */
-  calcControlPoint (start, end, cph = 0.5, cpv = 0.2) {
+  calcControlPoint ({start, end, direction = 'up', cph = 0.5, cpv = 0.2}) {
     if (end[1] === start[1]) {
 
     } else {
@@ -21,10 +22,13 @@ export const arcPoints = {
       let P1y = Ty + k1 * lTP1 / Math.sqrt(1 + Math.pow(k1, 2))
       let _P1x = Tx - lTP1 / Math.sqrt(1 + Math.pow(k1, 2))
       let _P1y = Ty - k1 * lTP1 / Math.sqrt(1 + Math.pow(k1, 2))
-      if (P1y > _P1y) {
-        return [P1x, P1y]
+      if (direction === 'down') {
+        return P1y > _P1y ? [_P1x, _P1y] : [P1x, P1y]
+      } else if (direction === 'ring') {
+        return end[0] > start[0] ? (P1y > _P1y ? [P1x, P1y] : [_P1x, _P1y]) : (P1y > _P1y ? [_P1x, _P1y] : [P1x, P1y])
+      } else { // 'up'
+        return P1y > _P1y ? [P1x, P1y] : [_P1x, _P1y]
       }
-      return [_P1x, _P1y]
     }
   },
   /**
@@ -40,11 +44,12 @@ export const arcPoints = {
     return k * k * p0 + 2 * (1 - t) * t * p1 + t * t * p2 // 二次贝赛尔曲线方程
   },
 
-  bezierPoints (start, end, npoints, options) {
-    options = options || {cph: 0.5, cpv: 0.2}
+  generateBezierPoints (start, end, npoints, options) {
+    options = options || {cph: 0.5, cpv: 0.2, direction: 'up'}
     let cph = options.cph || 0.5
     let cpv = options.cpv || 0.2
-    let cp = this.calcControlPoint(start, end, cph, cpv)
+    let direction = options.direction || 'up'
+    let cp = this.calcControlPoint({start, end, direction, cph, cpv})
 
     var points = [] // start, cp, end
     if (!npoints || npoints <= 2) {
@@ -68,18 +73,17 @@ export const arcPoints = {
    * @param {Array<number, number>} startPoint 该轨迹矢量的起点
    * @param {Array<number, number>} endPoint 该轨迹矢量的终点
    * @param {number} startPointIndex 该轨迹矢量在重复轨迹中的索引
+   * @param {number} dimensionSize 每个维度的轨迹图形最多显示的个数，超出之后的轨迹的cph值会更大
    * @param {number} initCph 轨迹最高点的位置水平方向比例 default: 0.45
    * @param {number} initCpv 轨迹最高点的位置垂直方向比例 default: 0.16
    * @param {number} cpvStep  default: 0.05
    * */
-  getCphvFromIdenticTrailVectorTimes (sameTrailVectorTimes, startPoint, endPoint, startPointIndex, initCph = 0.45, initCpv = 0.16, cpvStep = 0.05) {
+  getCphvFromIdenticTrailVectorTimes ({sameTrailVectorTimes, startPoint, endPoint, startPointIndex, dimensionSize = 2, initCph = 0.45, initCpv = 0.16, cpvStep = 0.1}) {
     let minCph = 0.1
     let key = `${startPoint[0]},${startPoint[1]}--${endPoint[0]},${endPoint[1]}`
     let times = sameTrailVectorTimes[key].length
     // 该轨迹矢量在重复轨迹中的索引
     let index = sameTrailVectorTimes[key].indexOf(startPointIndex)
-    // TODO: config dimensionSize
-    let dimensionSize = 2 // 每个维度的轨迹图形最多显示的个数，超出之后的轨迹的cph值会更大
     let cphStep = ((initCph - minCph) / dimensionSize).toFixed(2)
     let cpvIndex = parseInt(index / dimensionSize) // 维度索引
     let cphIndex = index % dimensionSize // 同个维度下的轨迹索引

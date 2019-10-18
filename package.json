@@ -6,7 +6,7 @@
       "url": ""
     }
   ],
-  "description": "Draw the trails that does not coincide.",
+  "description": "Generate arcs routes as lines that does not coincide between to points.",
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -22,8 +22,8 @@
     "bezier"
   ],
   "license": "MIT",
-  "main": "lib/arc.js",
-  "name": "arc",
+  "main": "lib/arc-points.js",
+  "name": "arc-points",
   "repository": {
     "type": "git",
     "url": "https://github.com/xiaohaifengke/arc"
