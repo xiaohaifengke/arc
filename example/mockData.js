@@ -1,0 +1,61 @@
+export default [{
+  'captureId': '',
+  'picUrl': '',
+  'captureDate': '2019-05-13 20:37:01',
+  'position': '九龙口',
+  'sourceName': 'FIRST POINT',
+  'areaName': '丰台区',
+  'lnt': 116.3444779,
+  'lat': 39.8068568,
+  'deployLevel': 1,
+  'score': 0.6036070585250854,
+  'coordinate': [116.3444779,39.8068568]
+}, {
+  'captureId': '',
+  'picUrl': '',
+  'captureDate': '2019-05-13 17:52:11',
+  'position': '龙潭公园',
+  'sourceName': 'SECOND POINT',
+  'areaName': '丰台区',
+  'lnt': 116.4413045,
+  'lat': 39.8788020,
+  'deployLevel': null,
+  'score': 0.6333504915237427,
+  'coordinate': [116.4413045,39.8788020]
+}, {
+  'captureId': '',
+  'picUrl': '',
+  'captureDate': '2019-05-13 20:37:01',
+  'position': '北京动物园',
+  'sourceName': 'THIRD POINT',
+  'areaName': '海淀区',
+  'lnt': 116.3351632,
+  'lat': 39.9415375,
+  'deployLevel': 1,
+  'score': 0.6036070585250854,
+  'coordinate': [116.3351632,39.9415375]
+}, {
+  'captureId': '',
+  'picUrl': '',
+  'captureDate': '2019-05-13 17:52:11',
+  'position': '汉庭酒店',
+  'sourceName': 'FORTH POINT',
+  'areaName': '丰台区',
+  'lnt': 116.2715627,
+  'lat': 39.8899182,
+  'deployLevel': null,
+  'score': 0.6333504915237427,
+  'coordinate': [116.2715627,39.8899182]
+}, {
+  'captureId': '',
+  'picUrl': '',
+  'captureDate': '2019-05-13 20:37:01',
+  'position': '北京西站',
+  'sourceName': 'FIFTH POINT',
+  'areaName': '丰台区',
+  'lnt': 116.3207437,
+  'lat': 39.8958756,
+  'deployLevel': 1,
+  'score': 0.6036070585250854,
+  'coordinate': [116.3207437,39.8958756]
+}]

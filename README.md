@@ -1,58 +1,60 @@
-> Mark the face frame in image and get the corresponding coordinates.
-> This lib is dependent on [fabric.js](http://fabricjs.com).
+> Generate arcs routes as lines that does not coincide between to points.
 
 ## Install
-
+npm
 ```shell
-npm install fabric -S
-npm install graph-mark -S
+npm i arc-points -S
+```
+or yarn
+```shell
+yarn add arc-points
 ```
 
-## Quick Start
+## Usage
+Require the library in node.js like:
 
 ```javascript
-import { fabric } from 'fabric'
-import { Mark } from 'graph-mark'
-
-let mark = new Mark({ canvasTagId: 'c', maxResultsLength: 1 })
-mark.init(imgElement)
+var arc = require('arc-points');
+arc.arcPoints.methodName()
 ```
 
-## Default options
-```javascript
-defaultOptions = {
-    canvasTagId: null,
-    maxResultsLength: 1000000
-  }
-```
+Use in the browser like:
 
-- canvasTagId: Canvas tag id.
-- maxResultsLength: The number of rectangular box that can exist at the same time. default: 1000000
-
-## Examples of use
-cdns
 ```html
-<!doctype html>
-<html lang="en">
-<head>
-    <title>cdn example of use</title>
-    <script src="./fabric.js"></script>
-    <script src="../lib/graph-mark.js"></script>
-</head>
-<body>
-<img src="100x100x5.jpg" id="image1" style="display: none;">
-<img src="avatar.jpg" id="image2" style="display: none;">
-<canvas id="c" width="550" height="550"
-        style="margin-left: 20px; position: absolute; left: 20px; top: 20px; touch-action: none; user-select: none;border: 1px solid #333;"
-        class="lower-canvas"></canvas>
-</body>
-</html>
-<script>
-  var mark = new GraphMark.Mark({canvasTagId: 'c', maxResultsLength: 1});
-  var imgElement = document.getElementById('image1');
-  mark.init(imgElement);
-</script>
+<script src="./arc-points.js"></script>
+arc.arcPoints.methodName()
 ```
-You can test it on this [demo](https://github.com/xiaohaifengke/graph-mark/blob/dev/example/cdn-demo.html).
 
+ES2015:
 
+```javascript
+import { arcPoints } from '../lib/arc-points'
+arcPoints.methodName()
+```
+
+## API
+
+Methods:
+
+- generateBezierPoints(start, end, npoints, options) => *array*
+    > Generate arcs routes as lines that does not coincide between to points.
+    > - **start**: Start point like [x, y]. **Note:** *x and y are both numbers. If in a map, x denotes a longitude, y denotes a latitude.*
+    > - **end**: End point. The format is like **start**.
+    > - **npoints**: The number of points to be generated.
+    > - **options**: An object with three properties of *cph,cpv,direction*.
+    > - **options.cph**: Horizontal position ratio of control point. Default: 0.5
+    > - **options.cpv**: Vertical position ratio of control point. Default: 0.2
+    > - **options.direction**: The location of the generated arc with respect to the two-point connection. It could be *up*, *down* or *ring*. *ring* indicates that the generated arc direction is clockwise. Default: *up*
+
+- filterCoordinates
+- getTheSameTrailVectorTimes
+- getCphvFromIdenticTrailVectorTimes
+
+## Example
+
+You can download it and
+```shell
+cd example
+yarn
+yarn start
+```

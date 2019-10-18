@@ -2,11 +2,13 @@ const path = require('path')
 
 module.exports = {
   mode: 'production',
+  // mode: 'development',
   entry: './src/index.js',
   output: {
-    filename: 'arc.js',
+    filename: 'arc-points.js',
+    // filename: 'arc-points.dev.js',
     path: path.resolve(__dirname, 'lib'),
-    library: 'Arc',
+    library: 'arc',
     libraryTarget: 'umd',
     globalObject: 'this'
   },
