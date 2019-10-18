@@ -1,4 +1,4 @@
-> Generate arcs routes as lines that does not coincide between to points.
+> Generate arcs routes as lines that does not coincide between two points.
 
 ## Install
 npm

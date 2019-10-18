@@ -6,7 +6,7 @@
       "url": ""
     }
   ],
-  "description": "Generate arcs routes as lines that does not coincide between to points.",
+  "description": "Generate arcs routes as lines that does not coincide between two points.",
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
