@@ -2,11 +2,11 @@
 
 ## Install
 npm
-```shell
+```Command Line
 npm i arc-points -S
 ```
 or yarn
-```shell
+```Command Line
 yarn add arc-points
 ```
 
@@ -53,7 +53,7 @@ Methods:
 ## Example
 
 You can download it and
-```shell
+```Command Line
 cd example
 yarn
 yarn start
